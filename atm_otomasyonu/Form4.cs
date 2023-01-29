@@ -56,9 +56,11 @@ namespace atm_otomasyonu
             cnn.Open();
             cmd.ExecuteNonQuery();
             cnn.Close();
+            MessageBox.Show("Paranız yatırılıdı");
             bakiyesorgu();
             textBox1.Clear();
             textBox1.Focus();
+
         }
 
         private void button2_Click(object sender, EventArgs e)

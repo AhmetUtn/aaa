@@ -84,17 +84,26 @@ namespace atm_otomasyonu
 
         private void button1_Click(object sender, EventArgs e)
         {//öde
+            
             cek = Convert.ToInt32(label4.Text);
             para = Convert.ToInt32(money);
-            sonuc = para - cek;
-            SqlCommand cmd = new SqlCommand("Update users Set money=@money Where user_id=@user_id", cnn);
-            cmd.Parameters.AddWithValue("@user_id", frm2.id_mus);
-            cmd.Parameters.AddWithValue("@money", sonuc);
-            cnn.Open();
-            cmd.ExecuteNonQuery();
-            cnn.Close();
-            bakiyesorgu(); 
-
+            if (cek>para)
+            {
+                MessageBox.Show("Bakiyeniz yetersiz");
+            }
+            else
+            {
+                sonuc = para - cek;
+                SqlCommand cmd = new SqlCommand("Update users Set money=@money Where user_id=@user_id", cnn);
+                cmd.Parameters.AddWithValue("@user_id", frm2.id_mus);
+                cmd.Parameters.AddWithValue("@money", sonuc);
+                cnn.Open();
+                cmd.ExecuteNonQuery();
+                cnn.Close();
+                MessageBox.Show("Ödeme yapıldı");
+                bakiyesorgu();
+            }
+            
         }
     }
 }
